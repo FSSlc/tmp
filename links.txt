@@ -15,3 +15,80 @@ https://dy.linzefeng.top/api/v1/client/subscribe?token=52a8b8f01719de261ab9f7784
 https://yzec7.me/api/v1/client/subscribe?token=feb354966dcfac0655485cec88aa9f79
 https://www.linux-do-proxy.org/api/v1/client/subscribe?token=f44c4829a5827e1876dbaf10c11afb53
 https://www.999000.best/sub?token=1e1f99b24e0ca9ed1bd6aacf0026dcf8
+
+https://github.com/zy7y/fastapi-desktop
+PPX
+https://github.com/auuuuun/pywebview_vue_template
+https://github.com/wagenrace/VUE3-VITE-eel-starter
+
+#!/usr/bin/env python3
+import multiprocessing
+import tempfile
+
+from fastapi import FastAPI
+from uvicorn import Config, Server
+import webview
+
+from nicegui import ui
+
+
+class UvicornServer(multiprocessing.Process):
+    def __init__(self, config: Config):
+        super().__init__()
+        self.server = Server(config=config)
+        self.config = config
+
+    def stop(self):
+        self.terminate()
+
+    def run(self, *args, **kwargs):
+        self.server.run()
+
+
+def start_window(pipe_send, url_to_load):
+    def on_closed():
+        pipe_send.send("closed")
+
+    win = webview.create_window("Demo", url=url_to_load)
+    win.events.closed += on_closed
+    webview.start(storage_path=tempfile.mkdtemp())
+
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@ui.page("/show")
+def show():
+    ui.image("https://picsum.photos/id/377/640/360")
+
+
+ui.run_with(app)
+
+
+if __name__ == "__main__":
+    server_ip = "127.0.0.1"
+    server_port = 8080
+    conn_recv, conn_send = multiprocessing.Pipe()
+
+    windowsp = multiprocessing.Process(
+        target=start_window, args=(conn_send, f"http://{server_ip}:{server_port}/show")
+    )
+    windowsp.start()
+
+    config = Config("main:app", host=server_ip, port=server_port, log_level="debug")
+    instance = UvicornServer(config=config)
+    instance.start()
+
+    window_status = ""
+    while "closed" not in window_status:
+        # get a unit of work
+        window_status = conn_recv.recv()
+        # report
+        print(f"got {window_status}", flush=True)
+
+    instance.stop()
