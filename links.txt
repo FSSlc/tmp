@@ -1,35 +1,5 @@
-https://github.com/karinepires/docker-secure-vncserver/tree/master
-https://github.com/dcommander/virtualgl_docker_examples
-https://github.com/tokkenno/novnc-docker
-https://hub.docker.com/r/damanikjosh/virtualgl-turbovnc
-https://www.zerodochat.com/chat duck LDA-0618
-
-https://api.953959.xyz
-https://sharedchat.cn
-https://gcp.apisbost.top/
-
-https://xboard.fovt.live/api/v1/client/subscribe?token=1cf4fc5192318f67239ac3c7f97aae8c
-https://v1.mk/krtIX3Z
-https://api123.52pokemon.xyz/api/v1/client/subscribe?token=1c54a48f33e0ff2a490ca9ae1128bb77
-
-proxies:
-  - name: "Internxt VPN"
-    type: http
-    server: "dihgihw.internxt.com"
-    port: 8083
-    username: "internxt"
-    password: "pass"
-    tls: true
-
-proxy-groups:
-  - name: "Proxy"
-    type: select
-    proxies:
-      - "Internxt VPN"
-
-rules:
-  - DOMAIN-SUFFIX,google.com,Proxy
-  - DOMAIN-KEYWORD,google,Proxy
-  - DOMAIN-SUFFIX,ad.com,REJECT
-  - GEOIP,CN,DIRECT
-  - MATCH,Proxy
+https://v1.mk/JJYU96k
+https://3ra4214.tjsd.site/api/v1/client/subscribe?token=54aae03dfffe20126e28640907c76927
+https://raw.githubusercontent.com/zhangkaiitugithub/passcro/main/speednodes.yaml
+https://m.sub12345.org/link/Pqvyfz10lALKO77H?clash=1
+https://sss.kuaimao2.club/api/v1/client/subscribe?token=c6dafc2c78fd978e9d4e105413cf6d67
