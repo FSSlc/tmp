@@ -1,0 +1,39 @@
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yml and/or the recipe/meta.yaml.
+# -*- mode: yaml -*-
+
+jobs:
+- job: win
+  pool:
+    vmImage: windows-2022
+  strategy:
+    matrix:
+      win_64_:
+        CONFIG: win_64_
+        UPLOAD_PACKAGES: 'False'
+  timeoutInMinutes: 360
+  variables:
+    CONDA_BLD_PATH: D:\\bld\\
+    UPLOAD_TEMP: D:\\tmp
+
+  steps:
+    - task: PythonScript@0
+      displayName: 'Download Miniforge'
+      inputs:
+        scriptSource: inline
+        script: |
+          import urllib.request
+          url = 'https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe'
+          path = r"$(Build.ArtifactStagingDirectory)/Miniforge.exe"
+          urllib.request.urlretrieve(url, path)
+
+    - script: |
+        start /wait "" %BUILD_ARTIFACTSTAGINGDIRECTORY%\Miniforge.exe /InstallationType=JustMe /RegisterPython=0 /S /D=C:\Miniforge
+      displayName: Install Miniforge
+
+    - powershell: Write-Host "##vso[task.prependpath]C:\Miniforge\Scripts"
+      displayName: Add conda to PATH
+
+    - script: |
+        call "conda --version"
+      displayName: Run Windows build
