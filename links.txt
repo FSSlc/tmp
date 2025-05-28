@@ -5,3 +5,5 @@
     https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml
     https://update.glados-config.com/mihomo/543454/7b9d17e/80064/glados.yaml
     https://chromego-sub.netlify.app/sub/merged_proxies_new.yaml
+
+https://xbox.crvesoft.top/s/2a4dbce8471b5cf777212e933d7cdc55
