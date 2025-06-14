@@ -7,3 +7,6 @@
     https://chromego-sub.netlify.app/sub/merged_proxies_new.yaml
 
 https://xbox.crvesoft.top/s/2a4dbce8471b5cf777212e933d7cdc55
+
+https://github.com/wzdnzd/aggregator/issues/91
+https://ohayoo-pm.hf.space/api/v1/subscribe?token=ouiw0lw7h3gx9fzm&list=true&target=clash
